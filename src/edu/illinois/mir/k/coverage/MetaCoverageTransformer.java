@@ -11,7 +11,7 @@ import org.kframework.kil.visitors.exceptions.TransformerException;
 
 public class MetaCoverageTransformer extends BasicTransformer{
 
-	public static Map<Long, Rule> idToRule=new HashMap<>();
+	public static Map<Rule, Long> RuleToId=new HashMap<>();
 	static long i = 0;
 	public MetaCoverageTransformer(String name, Context context) {
 		super(name, context);
@@ -21,7 +21,7 @@ public class MetaCoverageTransformer extends BasicTransformer{
 	public ASTNode transform(Rule node) throws TransformerException {
 //		if(i==0)
 //			System.out.println("rule was touched");
-		idToRule.put(i++, node);
+		RuleToId.put(node, i++);
 		
 		return node;
 		
