@@ -21,7 +21,7 @@ public class CoverageBackend extends  BasicBackend{
 	public void run(Definition definition) throws IOException { }
 
 	@Override
-    public String getDefaultStep() {
+	public String getDefaultStep() {
         return "LastStep";
     }
 
