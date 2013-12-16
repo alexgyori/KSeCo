@@ -58,6 +58,7 @@ import org.kframework.main.FirstStep;
 import org.kframework.main.LastStep;
 import org.kframework.utils.BinaryLoader;
 import org.kframework.utils.Stopwatch;
+import org.kframework.utils.general.GlobalSettings;
 
 import edu.illinois.mir.k.coverage.CoverageTransformer;
 import edu.illinois.mir.k.coverage.MetaCoverageTransformer;
@@ -138,9 +139,10 @@ public class JavaSymbolicBackend extends BasicBackend {
         steps.add(new ResolveFunctions(context));
         steps.add(new AddKCell(context));
 
-        steps.add(new MetaCoverageTransformer("MetaCoverageTransformer",context));
-        steps.add(new CoverageTransformer("CoverageTransformer",context));
-
+        if(GlobalSettings.tracegen){
+        	steps.add(new MetaCoverageTransformer("MetaCoverageTransformer",context));
+        	steps.add(new CoverageTransformer("CoverageTransformer",context));
+        }
         
         steps.add(new AddStreamCells(context));
         //steps.add(new AddSymbolicK(context));
