@@ -63,19 +63,22 @@ public class CoverageTransformer extends BasicTransformer {
 	@Override
 	public ASTNode transform(Configuration node) {
 		Configuration config = node.shallowCopy();
-		Cell coverageCell = createCell(TRACE_CELL_TAG, List.EMPTY);
+		
+		Cell traceCell = createCell(TRACE_CELL_TAG, List.EMPTY);
 		Cell metaCell = createCell(META_CELL_TAG, createMetaMap());
 
-		Term body = config.getBody();
-		body=boxTermToBag(body);
-
+		//create cell that handles tracing
 		Bag b = new Bag();
-		((Bag) b).add(coverageCell);
+		((Bag) b).add(traceCell);
 		((Bag) b).add(metaCell);
 		Cell container = createCell(this.CONTAINER_CELL, b);
 
+		//add cell to current configuration
+		Term body = config.getBody();
+		body=boxTermToBag(body);
 		((Bag)body).add(container);
 		config.setBody(body);
+		
 		return config;
 	}
 	
